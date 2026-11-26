@@ -1,0 +1,20 @@
+[config]
+version_check = false
+source_color_index = 0
+
+[templates.neovim]
+input_path = "~/.config/matugen/templates/nvim-colors.json"
+output_path = "~/.cache/matugen/nvim-colors.json"
+mode = "Smart"
+type = "SchemeSmart"
+#post_hook = "pkill -SIGUSR1 nvim"
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/themes/Matugen.conf'
+post_hook = "kitty +kitten themes --reload-in=all Matugen"
+#
+# [templates.Obsidian]
+# input_path = "~/.config/matugen/templates/obsidian-minimal-matugen-colors.css"
+# output_path = ""
+# output_path = <path/to/snippet folder>

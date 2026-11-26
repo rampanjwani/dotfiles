@@ -1,0 +1,272 @@
+@import "colors.css";
+
+* {
+  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 7 Free", sans-serif;
+  font-size: 13px;
+  text-shadow: none;
+}
+
+notificationwindow,
+blankwindow,
+.blank-window,
+.floating-notifications {
+  background: transparent;
+}
+
+/* Control Center Panel */
+.control-center {
+  background: @surface_alpha;
+  backdrop-filter: blur(20px);
+  color: @on_surface;
+  border: 1.5px solid @outline_variant;
+  border-radius: 16px;
+  padding: 8px;
+}
+
+.control-center .control-center-list {
+  background: transparent;
+}
+
+.control-center .control-center-list-placeholder {
+  color: @on_surface_variant;
+  opacity: 0.7;
+}
+
+/* Widgets */
+.widget {
+  margin: 4px 6px;
+  padding: 6px 8px;
+  border-radius: 12px;
+}
+
+/* Title Widget */
+.widget-title > label {
+  color: @on_surface;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.widget-title > button {
+  background: @surface_container;
+  color: @on_surface;
+  border: 1px solid @outline_variant;
+  border-radius: 10px;
+  padding: 4px 12px;
+  box-shadow: none;
+  transition: background 0.15s ease-in-out;
+}
+
+.widget-title > button:hover {
+  background: @primary;
+  color: @on_primary;
+  border-color: @primary;
+}
+
+/* Do Not Disturb Widget */
+.widget-dnd {
+  background: @surface_container;
+  border: 1px solid @outline_variant;
+  padding: 8px 12px;
+}
+
+.widget-dnd > label {
+  color: @on_surface;
+  font-size: 13px;
+}
+
+.widget-dnd switch {
+  background: @surface_container_high;
+  border: 1px solid @outline_variant;
+  border-radius: 12px;
+  min-width: 44px;
+  min-height: 22px;
+}
+
+.widget-dnd switch:checked {
+  background: @primary;
+  border-color: @primary;
+}
+
+.widget-dnd switch slider {
+  background: @on_surface;
+  border-radius: 100%;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.widget-dnd switch:checked slider {
+  background: @on_primary;
+}
+
+/* MPRIS Media Widget (below Do Not Disturb) */
+.widget-mpris {
+  padding: 0 0 14px 0;
+  margin: 6px 6px 10px 6px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, alpha(@outline, 0.45), transparent) 0 0 1 0;
+  border-radius: 0;
+}
+
+/* Hide MPRIS carousel dots and side navigation arrows */
+.widget-mpris > box > button,
+.widget-mpris carouselindicatordots {
+  opacity: 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+.widget-mpris .widget-mpris-player {
+  margin: 0;
+  border-radius: 14px;
+  border: 1px solid @outline_variant;
+  background: @surface_container;
+  box-shadow: none;
+}
+
+.widget-mpris .widget-mpris-player .mpris-background {
+  filter: blur(12px);
+  opacity: 0.45;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+  padding: 12px;
+  background-color: @surface_alpha;
+  border-radius: 14px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
+  border-radius: 10px;
+  -gtk-icon-size: 72px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+  color: @on_surface;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  color: @primary;
+  font-size: 12px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button {
+  background: transparent;
+  color: @on_surface;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 8px;
+  box-shadow: none;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button:hover {
+  background: @primary;
+  color: @on_primary;
+}
+
+/* Notifications */
+.notification-row {
+  background: none;
+  outline: none;
+}
+
+.notification-row .notification-background {
+  padding: 4px 6px;
+}
+
+.notification-row .notification-background .notification {
+  background: @surface_container;
+  color: @on_surface;
+  border: 1px solid @outline_variant;
+  border-radius: 14px;
+  padding: 4px;
+  box-shadow: none;
+  transition: background 0.15s ease-in-out;
+}
+
+.floating-notifications .notification-row .notification-background .notification {
+  background: @surface_alpha;
+  backdrop-filter: blur(20px);
+  border: 1.5px solid @outline_variant;
+}
+
+.notification-row .notification-background .notification.critical {
+  border-color: @error;
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  background: transparent;
+  color: @on_surface;
+  border: none;
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: @surface_container_high;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .image {
+  -gtk-icon-size: 48px;
+  border-radius: 10px;
+  margin: 4px 8px 4px 4px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box label {
+  filter: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  color: @on_surface;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  color: @primary;
+  font-size: 11px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  color: @on_surface_variant;
+  font-size: 12px;
+}
+
+.notification-action {
+  background: @surface_container_high;
+  color: @on_surface;
+  border: 1px solid @outline_variant;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 4px 8px;
+  box-shadow: none;
+}
+
+.notification-action:hover {
+  background: @primary;
+  color: @on_primary;
+}
+
+.close-button {
+  background: @surface_container_high;
+  color: @on_surface;
+  border: none;
+  border-radius: 100%;
+  min-width: 22px;
+  min-height: 22px;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 0;
+  box-shadow: none;
+}
+
+.close-button:hover {
+  background: @error;
+  color: @on_error;
+}

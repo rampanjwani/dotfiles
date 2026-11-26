@@ -1,0 +1,349 @@
+// -*- mode: jsonc -*-
+{
+    "reload_style_on_change": true,
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    //"margin-left": 10,
+    //"margin-right": 10,
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        // "hyprland/mode",
+        // "hyprland/scratchpad",
+        "mpris"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        // "mpd",
+        "tray",
+        "idle_inhibitor",
+        "power-profiles-daemon",
+        "pulseaudio",
+        // "network",
+        // "cpu",
+        // "memory",
+        "temperature",
+        "backlight",
+        // "keyboard-state",
+        // "hyprland/language",
+        "battery",
+        // "battery#bat2",
+        "clock",
+        // "custom/power"
+        "custom/notification"
+    ],
+    // Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        // "format": "{name}: {icon}",
+        "format": "{icon}",
+        "format-icons": {
+            // "1": "",
+            // "2": "",
+            // "3": "",
+            // "4": "",
+            // "5": "",
+            // "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+    "niri/workspaces": {
+        "format": "{icon} {windows}",
+        "format-window-separator": " ",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "app_id<firefox>": "",
+            "app_id<dolphin>": "",
+            "app_id<org.gnome.Nautilus>": "",
+            "app_id<thunar>": "",
+            "app_id<foot>": ""
+        },
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "active": "",
+            "default": ""
+        }
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "hyprland/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "hyprland/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 8,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "tooltip-format": "{percent}% {icon}",
+        "format-icons": ["󰃞", "󰃝", "󰃟", "󰃠"],
+        "min-brightness": 1
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nCPU driver: {cpu_driver}\nPlatform driver: {platform_driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        // "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "tooltip-format": "{essid} ({signalStrength}%) ",
+        // "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "format-linked": "{ifname} (No IP) 󰊗",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        // "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} ",
+        "format-bluetooth-muted": "󰅶 {icon} ",
+        "format-muted": "󰅶",
+        // "format-source": "{volume}% ",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+"hyprland/window": {
+	    "format": "{class}",
+            "max-length": 30,
+            "rewrite": {
+  		// Web & Chat
+  		"brave-origin": "Brave",
+                "org.ladybird.Ladybird": "Ladybird",
+                "vesktop": "Vesktop",
+    
+                // Terminal & Development
+    		"kitty": "Kitty",
+                "com.system76.CosmicTerm": "COSMIC Term",
+                "Bruno": "Bruno",
+                "godot": "Godot",
+                "Godot": "Godot",
+
+                // File Managers
+    		"org.gnome.Nautilus": "Nautilus",
+                "dolphin": "Dolphin",
+                "com.system76.CosmicFiles": "COSMIC Files",
+
+  		// Notes & Office
+                "md.obsidian.Obsidian": "Obsidian",
+                "obsidian": "Obsidian",
+                "libreoffice-writer": "LibreOffice Writer",
+                "libreoffice-calc": "LibreOffice Calc",
+                "libreoffice-impress": "LibreOffice Impress",
+                "libreoffice-(.*)": "LibreOffice",
+                "org.gnome.TextEditor": "Text Editor",
+                "com.system76.CosmicEdit": "COSMIC Edit",
+
+		// Media & Graphics
+                "Spotify": "Spotify",
+                "spotify": "Spotify",
+                "mpv": "mpv",
+                "youtube-music": "YouTube Music",
+                "YouTube Music": "YouTube Music",
+                "com.github.th_ch.youtube_music": "YouTube Music",
+                "chrome-music.youtube.com.*": "YouTube Music",
+                "brave-music.youtube.com.*": "YouTube Music",
+                "com.stremio.Service": "Stremio",
+                "blender": "Blender",
+                "Blender": "Blender",
+                "gimp": "GIMP",
+                "kdenlive": "Kdenlive",
+                "obs": "OBS Studio",
+                "com.obsproject.Studio": "OBS Studio",
+
+		// Utilities & Settings
+                "org.pulseaudio.pavucontrol": "Pavucontrol",
+                "pwvucontrol": "Pwvucontrol",
+                "org.gnome.Calculator": "Calculator",
+                "org.gnome.SystemMonitor": "System Monitor",
+                "org.localsend.localsend_app": "LocalSend",
+                "localsend": "LocalSend",
+                "waypaper": "Waypaper",
+		"org.vinegarhq.Sober": "Sober",
+
+  		// Fallback when workspace is empty
+                "": "Desktop"
+            }
+        },
+    "mpris": {
+        "format": "{player_icon}  {status_icon}  {dynamic}",
+        "format-paused": "{player_icon}  {status_icon}  {dynamic}",
+        "dynamic-order": ["title", "artist"],
+        "dynamic-separator": " - ",
+        "dynamic-len": 40,
+        "max-length": 40,
+        "player-icons": {
+            "default": "",
+            "mpv": "",
+            "spotify": "",
+            "brave": "",
+            "brave-origin": "",
+            "plasma-browser-integration": "",
+            "youtube-music": "",
+            "YouTube Music": "",
+            "youtube_music": "",
+            "ytmdesktop": ""
+        },
+        "status-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
+    "custom/power": {
+        "format" : "⏻ ",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		"menu-actions": {
+			"shutdown": "shutdown",
+			"reboot": "reboot",
+			"suspend": "systemctl suspend",
+			"hibernate": "systemctl hibernate"
+		}
+    },
+"custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰅸",
+      "none": "󰂜",
+      "dnd-notification": "󰅸",
+      "dnd-none": "󱏨",
+      "inhibited-notification": "󰅸",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "󰅸",
+      "dnd-inhibited-none": "󱏨"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click-right": "swaync-client -d -sw",
+    "on-click": "swaync-client -t -sw",
+    "escape": true
+  }
+}

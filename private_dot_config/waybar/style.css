@@ -1,0 +1,423 @@
+@import "colors.css";
+
+/* ==========================================================================
+   Waybar style: unified typography + centering
+   (bar height, border, spacing and module padding/margins are unchanged)
+   ========================================================================== */
+
+/* [FIX] One font, one weight, one size for EVERYTHING.
+   - "Nerd Font Mono" first: every icon is exactly one cell wide, so icon
+     modules have the same width/height metrics as text-only ones.
+   - Fallback fonts stay at the end, but are only used for a missing glyph
+     (a glyph from another font changes the line height and shifts the text
+     of that module up/down by a pixel).
+   - font-weight: normal (500 made GTK pick other faces for some glyphs).
+   - min-height: 0 stops GTK themes from forcing taller buttons/labels. */
+* {
+    font-family: "CaskaydiaCove Nerd Font", "Font Awesome 7 Free", "Font Awesome 7 Brands", FontAwesome, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    min-height: 0;
+    text-shadow: none;
+}
+
+/* Outer Waybar window: draws the border */
+window#waybar {
+    background-color: alpha(@surface, 0.5);
+    color: @on_surface;
+    border: 1.5px solid;
+    border-image: linear-gradient(45deg, @primary, @secondary, @tertiary, @primary) 1;
+    padding: 0;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* [FIX] workspace buttons: no theme min-size / margin, so the circles sit on
+   the same centre line as the other modules */
+#workspaces button {
+    margin: 0;
+    min-width: 0;
+    min-height: 0;
+    background-color: transparent;
+    color: @outline;
+}
+
+#workspaces button:last-child {
+    padding-right: 0;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    border: 0;
+    box-shadow: inset 0 0 transparent;
+    color: @on_surface;
+}
+
+#workspaces button.focused, #workspaces button.active {
+    background-color: transparent;
+    color: @primary;
+}
+
+#workspaces button.urgent {
+    background-color: transparent;
+    color: @error;
+}
+
+#mode {
+    background-color: transparent;
+    color: #64727D;
+    box-shadow: none;
+}
+
+/* [FIX] every module gets the identical box: same horizontal padding, no
+   vertical padding or margin, no min-height, transparent background */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#mpris,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#window,
+#custom-notification {
+    padding: 0 10px;
+    margin: 0;
+    min-height: 0;
+    background-color: transparent;
+}
+
+#workspaces {
+    padding: 0 10px 0 0;
+    margin: 0;
+}
+
+/* [FIX] was "padding: 2px 8px 0 8px" (pushed the time ~1px lower than every
+   other module) and a dim #64727D that looked like a different style.
+   Same padding as the rest; colour now matches the plain white text. */
+#clock {
+    background-color: transparent;
+    color: @on_surface;
+    padding: 0 10px;
+}
+
+#custom-notification {
+    background-color: transparent;
+    color: @on_surface;
+    padding: 0 10px;
+}
+
+#custom-notification.notification,
+#custom-notification.inhibited-notification {
+    color: @primary;
+}
+
+#custom-notification.dnd-none,
+#custom-notification.dnd-inhibited-none {
+    color: @outline;
+}
+
+#battery {
+    background-color: transparent;
+    color: @on_surface;
+}
+
+#battery.charging, #battery.plugged {
+    color: @tertiary;
+    background-color: transparent;
+}
+
+@keyframes blink {
+    to {
+        background-color: transparent;
+        color: @on_surface;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: transparent;
+    color: @error;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power-profiles-daemon.performance {
+    background-color: transparent;
+    color: @error;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: transparent;
+    color: @secondary;
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: transparent;
+    color: @tertiary;
+}
+
+label:focus {
+    background-color: transparent;
+}
+
+#cpu {
+    background-color: transparent;
+    color: @tertiary;
+}
+
+#memory {
+    background-color: transparent;
+    color: @secondary;
+}
+
+#disk {
+    background-color: transparent;
+    color: @secondary;
+}
+
+#backlight {
+    background-color: transparent;
+    color: @secondary;
+}
+
+#network {
+    background-color: transparent;
+    color: @tertiary;
+}
+
+#network.disconnected {
+    background-color: transparent;
+    color: @error;
+}
+
+#pulseaudio {
+    background-color: transparent;
+    color: @primary;
+}
+
+#pulseaudio.muted {
+    background-color: transparent;
+    color: @outline;
+}
+
+#wireplumber {
+    background-color: transparent;
+    color: #fff0f5;
+}
+
+#wireplumber.muted {
+    background-color: transparent;
+    color: #f53c3c;
+}
+
+#custom-media {
+    background-color: transparent;
+    color: #66cc99;
+    min-width: 100px;
+}
+
+#mpris {
+    background-color: transparent;
+    padding: 0 10px;
+    margin: 0;
+    font-style: normal;
+}
+
+#mpris:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+#mpris:active {
+    box-shadow: none;
+    border: none;
+    padding: 0 10px;
+    margin: 0;
+}
+
+#mpris.playing {
+    background-color: transparent;
+    color: @tertiary;
+}
+
+#mpris.paused {
+    background-color: transparent;
+    color: @outline;
+}
+
+#temperature {
+    background-color: transparent;
+    color: @tertiary;
+}
+
+#temperature.critical {
+    background-color: transparent;
+    color: @error;
+}
+
+#tray {
+    background-color: transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: transparent;
+}
+
+#idle_inhibitor {
+    background-color: transparent;
+    color: @outline;
+}
+
+#idle_inhibitor.activated {
+    background-color: transparent;
+    color: @primary;
+}
+
+#mpd {
+    background-color: transparent;
+    color: #66cc99;
+}
+
+#mpd.disconnected {
+    background-color: transparent;
+    color: #f53c3c;
+}
+
+#mpd.stopped {
+    background-color: transparent;
+    color: #90b1b1;
+}
+
+#mpd.paused {
+    background-color: transparent;
+    color: #51a37a;
+}
+
+#language {
+    background: transparent;
+    color: #00b093;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: transparent;
+    color: #97e1ad;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: transparent;
+    color: #ffffff;
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    background-color: transparent;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: transparent;
+    color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: transparent;
+    color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: transparent;
+    color: #0069d4;
+}
+
+#privacy-item.location {
+    background-color: transparent;
+    color: #00afff;
+}
+
+/* Inset the actual GTK module groups (unchanged) */
+window#waybar .modules-left,
+window#waybar .modules-center,
+window#waybar .modules-right {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* Keep the first and last modules away from the side borders (unchanged) */
+window#waybar .modules-left {
+    margin-left: 6px;
+}
+
+window#waybar .modules-right {
+    margin-right: 6px;
+}
+
+/* If a single module still looks 1px high/low on your screen, nudge ONLY
+   that module, e.g.:   #pulseaudio { padding-top: 1px; }   */
