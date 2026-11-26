@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+style=$(shuf -i 1-4 -n 1)
+
+case "$style" in
+    # Bottom: large horizontal carousel
+    1)
+        exec matuwall \
+            -p bottom --carousel \
+            -c 5 -r 1 -s 18 -m 24 \
+            --background "#11111bcc" \
+            --radius 18 --panel-radius 28 \
+            -w 280 --height 158
+        ;;
+
+    # Center: regular wallpaper grid
+    2)
+        exec matuwall \
+            -p center --no-carousel \
+            -c 4 -r 3 -s 14 -m 30 \
+            --background "#1e1e2edd" \
+            --radius 16 --panel-radius 30 \
+            -w 250 --height 141
+        ;;
+
+    # Left: vertical carousel
+    3)
+        exec matuwall \
+            -p left --carousel \
+            -c 3 -s 14 -m 22 \
+            --background "#11111bdd" \
+            --radius 18 --panel-radius 26 \
+            -w 180 --height 210
+        ;;
+
+    # Top: compact horizontal carousel
+    4)
+        exec matuwall \
+            -p top --carousel \
+            -c 6 -s 12 -m 18 \
+            --background "#181825dd" \
+            --radius 20 --panel-radius 28 \
+            -w 220 --height 124
+        ;;
+esac
